@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<div id="usercard">
+		</div>
+		<p>Just text</p>
+		<a class="link" href="https://whoer.net">Link</a>
+		<p class="hint">Some little hint</p>
+		<button id="btn" class="button">Show/Hide Main Button</button>
+		<button id="btnED" class="button">Enable/Disable Main Button</button>
+	</body>
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+	<script>
+		let tg = window.Telegram.WebApp;
+		tg.expand();
+
+		tg.MainButton.text = "Changed Text";
+		tg.MainButton.textColor = "#F55353";
+		tg.MainButton.color = "#143F6B";
+
+		btn.addEventListener('click', function(){
+			if (tg.MainButton.isVisible){
+				tg.MainButton.hide()
+			}
+			else{
+				tg.MainButton.show()
+			}
+		});
+
+		let btnED = document.getElementById("btnED");
+		btnED.addEventListener('click', function(){
+			if (tg.MainButton.isActive){
+				tg.MainButton.setParams({"color": "#E0FFFF"});
+				tg.MainButton.disable()
+			}
+			else{
+				tg.MainButto.setParams({"color": "#143F6B"});
+				tg.MainButton.enable()
+			}
+		});
+
+		Telegram.WebApp.onEvent('mainButtonClicked', function(){
+			tg.sendData("some string to send");
+				});
+	</script>
+</html>
